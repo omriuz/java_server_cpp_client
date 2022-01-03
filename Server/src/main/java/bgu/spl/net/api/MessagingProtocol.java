@@ -1,4 +1,4 @@
-package bgu.spl.net.api;
+package main.java.bgu.spl.net.api;
 
 public interface MessagingProtocol<T> {
  

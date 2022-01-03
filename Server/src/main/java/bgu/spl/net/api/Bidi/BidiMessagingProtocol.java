@@ -1,4 +1,4 @@
-package bgu.spl.net.api.bidi;
+package main.java.bgu.spl.net.api.Bidi;
 
 public interface BidiMessagingProtocol<T>  {
 	/**

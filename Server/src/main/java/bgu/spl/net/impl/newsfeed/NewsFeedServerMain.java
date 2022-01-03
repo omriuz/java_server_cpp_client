@@ -1,9 +1,8 @@
-package bgu.spl.net.impl.newsfeed;
+package main.java.bgu.spl.net.impl.newsfeed;
 
-import bgu.spl.net.impl.newsfeed.NewsFeed;
-import bgu.spl.net.impl.rci.ObjectEncoderDecoder;
-import bgu.spl.net.impl.rci.RemoteCommandInvocationProtocol;
-import bgu.spl.net.srv.Server;
+import main.java.bgu.spl.net.impl.BGS.ObjectEncoderDecoder;
+import main.java.bgu.spl.net.impl.BGS.RemoteCommandInvocationProtocol;
+import main.java.bgu.spl.net.srv.Server;
 
 public class NewsFeedServerMain {
 

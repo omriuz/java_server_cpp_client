@@ -1,7 +1,8 @@
-package bgu.spl.net.srv;
+package main.java.bgu.spl.net.srv;
 
-import bgu.spl.net.api.MessageEncoderDecoder;
-import bgu.spl.net.api.MessagingProtocol;
+import main.java.bgu.spl.net.api.Bidi.BidiMessagingProtocol;
+import main.java.bgu.spl.net.api.MessageEncoderDecoder;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -33,11 +34,12 @@ public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler
             while (!protocol.shouldTerminate() && connected && (read = in.read()) >= 0) {
                 T nextMessage = encdec.decodeNextByte((byte) read);
                 if (nextMessage != null) {
-                    T response = protocol.process(nextMessage);
-                    if (response != null) {
-                        out.write(encdec.encode(response));
-                        out.flush();
-                    }
+                    protocol.process(nextMessage);
+//                    T response = protocol.process(nextMessage);
+//                    if (response != null) {
+//                        out.write(encdec.encode(response));
+//                        out.flush();
+//                    }
                 }
             }
 

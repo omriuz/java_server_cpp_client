@@ -1,6 +1,4 @@
-package bgu.spl.net.api.bidi;
-
-import java.io.IOException;
+package main.java.bgu.spl.net.api.Bidi;
 
 public interface Connections<T> {
 

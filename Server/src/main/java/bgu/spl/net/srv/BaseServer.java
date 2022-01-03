@@ -1,7 +1,9 @@
-package bgu.spl.net.srv;
+package main.java.bgu.spl.net.srv;
 
-import bgu.spl.net.api.MessageEncoderDecoder;
-import bgu.spl.net.api.MessagingProtocol;
+import main.java.bgu.spl.net.api.Bidi.BidiMessagingProtocol;
+import main.java.bgu.spl.net.api.MessageEncoderDecoder;
+import main.java.bgu.spl.net.impl.BGS.Connections_Impl;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -36,13 +38,18 @@ public abstract class BaseServer<T> implements Server<T> {
             while (!Thread.currentThread().isInterrupted()) {
 
                 Socket clientSock = serverSock.accept();
-
-                BlockingConnectionHandler<T> handler = new BlockingConnectionHandler<>(
+                BidiMessagingProtocol protocol = protocolFactory.get();
+                BlockingConnectionHandler<T> handler = new BlockingConnectionHandler<T>(
                         clientSock,
                         encdecFactory.get(),
-                        protocolFactory.get());
+                        protocol
+                        );
+
+                int id = connections.addNewHandler(handler);
+                protocol.start(id,connections);
 
                 execute(handler);
+
             }
         } catch (IOException ex) {
         }

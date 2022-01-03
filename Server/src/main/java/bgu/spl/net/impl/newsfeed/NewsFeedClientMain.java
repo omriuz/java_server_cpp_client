@@ -1,6 +1,8 @@
-package bgu.spl.net.impl.newsfeed;
+package main.java.bgu.spl.net.impl.newsfeed;
 
-import bgu.spl.net.impl.rci.RCIClient;
+import main.java.bgu.spl.net.impl.BGS.Commands.RegisterCommand;
+import main.java.bgu.spl.net.impl.BGS.Commands.PublishNewsCommand;
+import main.java.bgu.spl.net.impl.rci.RCIClient;
 
 public class NewsFeedClientMain {
 
@@ -40,14 +42,14 @@ public class NewsFeedClientMain {
 
     private static void runSecondClient(String host) throws Exception {
         try (RCIClient c = new RCIClient(host, 7777)) {
-            c.send(new FetchNewsCommand("jobs"));
+            c.send(new RegisterCommand("jobs"));
             System.out.println("second client received: " + c.receive());
         }
     }
 
     private static void runThirdClient(String host) throws Exception {
         try (RCIClient c = new RCIClient(host, 7777)) {
-            c.send(new FetchNewsCommand("headlines"));
+            c.send(new RegisterCommand("headlines"));
             System.out.println("third client received: " + c.receive());
         }
     }
