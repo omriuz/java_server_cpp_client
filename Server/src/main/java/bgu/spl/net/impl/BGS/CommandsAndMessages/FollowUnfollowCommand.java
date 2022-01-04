@@ -27,7 +27,7 @@ public class FollowUnfollowCommand implements Command {
         if(success)
             backMessage = new AckMessage(opCode);
         else
-            backMessage = new ErrorMessage();//TODO message
+            backMessage = new ErrorMessage(opCode);
 
         connections.send(id,backMessage);
 

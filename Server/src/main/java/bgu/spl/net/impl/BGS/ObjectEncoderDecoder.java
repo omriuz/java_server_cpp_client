@@ -33,8 +33,11 @@ public class ObjectEncoderDecoder implements MessageEncoderDecoder<Communication
                 objectBytes = new byte[lengthBuffer.getInt()];
                 objectBytesIndex = 0;
                 lengthBuffer.clear();
+                opCodeBuffer.flip();
+                opCode = opCodeBuffer.getShort();
+                opCodeBuffer.clear();
             }
-        } else {
+        }else {
             objectBytes[objectBytesIndex] = nextByte;
             if (++objectBytesIndex == objectBytes.length) {
                 Command result = deserializeObject(opCode);

@@ -1,5 +1,6 @@
 package bgu.spl.net.impl.BGS;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -55,6 +56,10 @@ public class BgsUser {
         return success;
     }
 
+    public boolean isFollow(String userName){
+        return followings.contains(userName);
+    }
+
     public boolean isLogIn(){
         return logIn;
     }
@@ -68,6 +73,8 @@ public class BgsUser {
         currentConnectionsId = 0;
         logIn = false;
     }
+
+
 
     public String getUserName() {
         return userName;

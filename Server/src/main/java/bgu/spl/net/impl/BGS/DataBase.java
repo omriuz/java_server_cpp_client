@@ -13,11 +13,13 @@ public class DataBase {
     private ConcurrentHashMap<String, BgsUser> users;
     private ConcurrentHashMap<Integer, BgsUser> usersByConnectionId;
     private ConcurrentHashMap<BgsUser, ConcurrentLinkedQueue<NotificationMessage>> messagesForUsers;
+    private List<String> worldToFilter;
 
     public DataBase() {
         this.users = new ConcurrentHashMap<>();
         this.usersByConnectionId = new ConcurrentHashMap<>();
         this.messagesForUsers = new ConcurrentHashMap<>();
+        this.worldToFilter = new LinkedList<>();
     }
     public boolean register(RegisterCommand registerCommand,int connectionId){
         if(users.containsKey(registerCommand.getUserName()))
@@ -92,4 +94,32 @@ public class DataBase {
         }
         return isLogin;
     }
+    public boolean isRegistered(String userName){
+        return users.containsKey(userName);
+    }
+
+    public List<BgsUser> getLoggedInUsers(){
+        List<BgsUser> loggedInUsers = new LinkedList<>();
+        for(BgsUser user : users.values())
+            if(user.isLogIn())
+                loggedInUsers.add(user);
+        return loggedInUsers;
+    }
+
+    public List<String> getWorldToFilter(){
+        return worldToFilter;
+    }
+
+    public void block(int blockingUserId, String blockedUserName){
+        //1: add to the users blocked list
+        BgsUser currentUser = usersByConnectionId.get(blockingUserId);
+        if(!currentUser.isBlocked(blockedUserName))
+            currentUser.block(blockedUserName);
+
+        //2: unfollow each other
+        currentUser.unFollow(blockedUserName);
+        users.get(blockedUserName).unFollow(currentUser.getUserName());
+    }
+
+
 }

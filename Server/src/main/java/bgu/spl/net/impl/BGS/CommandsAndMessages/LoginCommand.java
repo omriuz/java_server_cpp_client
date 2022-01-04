@@ -7,12 +7,10 @@ import bgu.spl.net.impl.rci.Command;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class LoginCommand implements Command {
-    private DataBase dataBase;
-    private Connections_Impl connections;
-    private int id;
     private String username;
     private String password;
     private boolean captcha;
+    private int opCode;
 
 
 
@@ -20,6 +18,7 @@ public class LoginCommand implements Command {
         this.username = username;
         this.password =password;
         this.captcha = captcha;
+        this.opCode = 2;
     }
 
     public void execute(DataBase dataBase, Connections_Impl connections, int id){
@@ -35,7 +34,7 @@ public class LoginCommand implements Command {
             }
         }
         if(!captcha | !login)
-            connections.send(id, new ErrorMessage());//TODO build the Error message
+            connections.send(id, new ErrorMessage(opCode));//TODO build the Error message
     }
 
 }

@@ -5,7 +5,7 @@ import bgu.spl.net.impl.rci.Command;
 
 import java.io.Serializable;
 
-public class RemoteCommandInvocationProtocol<T> implements BidiMessagingProtocol<Serializable> {
+public class RemoteCommandInvocationProtocol implements BidiMessagingProtocol<Serializable> {
     private int connectionId;
     private Connections_Impl connections;
     private final DataBase dataBase;
