@@ -1,8 +1,10 @@
-package main.java.bgu.spl.net.impl.BGS;
+package bgu.spl.net.impl.BGS;
 
-import main.java.bgu.spl.net.impl.BGS.Commands.NotificationMessage;
-import main.java.bgu.spl.net.impl.BGS.Commands.RegisterCommand;
+import bgu.spl.net.impl.BGS.CommandsAndMessages.NotificationMessage;
+import bgu.spl.net.impl.BGS.CommandsAndMessages.RegisterCommand;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -66,7 +68,7 @@ public class DataBase {
         return messagesForUsers.get(users.get(userName));
     }
 
-    public boolean valid(int connectionId){
+    public boolean isValid(int connectionId){
         BgsUser user = usersByConnectionId.get(connectionId);
         if(user == null || !user.isLogIn()) return false;
         return true;

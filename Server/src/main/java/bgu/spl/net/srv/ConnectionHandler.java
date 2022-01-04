@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.bgu.spl.net.srv;
+package bgu.spl.net.srv;
 
 import java.io.Closeable;
 

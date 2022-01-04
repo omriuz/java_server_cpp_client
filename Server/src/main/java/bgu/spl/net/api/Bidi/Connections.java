@@ -1,4 +1,4 @@
-package main.java.bgu.spl.net.api.Bidi;
+package bgu.spl.net.api.Bidi;
 
 public interface Connections<T> {
 

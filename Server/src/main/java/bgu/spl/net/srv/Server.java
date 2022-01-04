@@ -1,7 +1,7 @@
-package main.java.bgu.spl.net.srv;
+package bgu.spl.net.srv;
 
-import main.java.bgu.spl.net.api.Bidi.BidiMessagingProtocol;
-import main.java.bgu.spl.net.api.MessageEncoderDecoder;
+import bgu.spl.net.api.Bidi.BidiMessagingProtocol;
+import bgu.spl.net.api.MessageEncoderDecoder;
 
 import java.io.Closeable;
 import java.util.function.Supplier;

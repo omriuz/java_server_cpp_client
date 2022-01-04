@@ -1,7 +1,7 @@
 package main.java.bgu.spl.net.impl.newsfeed;
 
-import main.java.bgu.spl.net.impl.BGS.Commands.RegisterCommand;
-import main.java.bgu.spl.net.impl.BGS.Commands.PublishNewsCommand;
+import main.java.bgu.spl.net.impl.BGS.CommandsAndMessages.RegisterCommand;
+import main.java.bgu.spl.net.impl.BGS.CommandsAndMessages.PublishNewsCommand;
 import main.java.bgu.spl.net.impl.rci.RCIClient;
 
 public class NewsFeedClientMain {

@@ -1,4 +1,4 @@
-package main.java.bgu.spl.net.impl.BGS;
+package bgu.spl.net.impl.BGS;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,10 +12,13 @@ public class BgsUser {
     private List<String> blocked;
     private boolean logIn;
     private int currentConnectionsId;
+    private int age;
+    private int numOfPosts;
+    private List<String> postsSent;
+    private HashMap<String , List<String>> pmsSent;
 
     //TODO: check if needed
 //    private Integer connectionID;
-//    private int age;
 //    private int NumPost;
 //   private boolean loggedin;
 //    private AtomicBoolean loggedin;
@@ -28,6 +31,11 @@ public class BgsUser {
         this.followings = new LinkedList<>();
         this.blocked = new LinkedList<>();
         this.logIn = false;
+        //TODO: compute the age of the user
+        this.age = 0;
+        this.numOfPosts = 0;
+        this.postsSent = new LinkedList<>();
+        this.pmsSent = new HashMap<>();
     }
 
     public boolean follow(String userName){
@@ -99,5 +107,39 @@ public class BgsUser {
 
     public int getCurrentConnectionsId() {
         return currentConnectionsId;
+    }
+
+    public void addPost(String postContent){
+        postsSent.add(postContent);
+        numOfPosts++;
+    }
+    public void addPM(String receiveUserName, String PMContent){
+        pmsSent.get(receiveUserName).add(PMContent);
+    }
+
+    public int numOfFollowers(){
+        return followersNames.size();
+    }
+
+    public int numOfFollowing(){
+        return followings.size();
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getNumOfPosts(){
+        return numOfPosts;
+    }
+
+    public boolean isBlocked(String userName){
+        return blocked.contains(userName);
+    }
+    public boolean isBlockingMe(BgsUser user){
+        return user.isBlocked(getUserName());
+    }
+    public void block(String userName){
+        blocked.add(userName);
     }
 }

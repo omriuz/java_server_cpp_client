@@ -1,4 +1,4 @@
-package main.java.bgu.spl.net.api;
+package bgu.spl.net.api;
 
 public interface MessageEncoderDecoder<T> {
 

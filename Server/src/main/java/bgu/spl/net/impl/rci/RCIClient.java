@@ -1,6 +1,6 @@
-package main.java.bgu.spl.net.impl.rci;
+package bgu.spl.net.impl.rci;
 
-import main.java.bgu.spl.net.impl.BGS.ObjectEncoderDecoder;
+import bgu.spl.net.impl.BGS.ObjectEncoderDecoder;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

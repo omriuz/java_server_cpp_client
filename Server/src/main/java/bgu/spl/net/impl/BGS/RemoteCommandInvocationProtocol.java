@@ -1,7 +1,7 @@
-package main.java.bgu.spl.net.impl.BGS;
+package bgu.spl.net.impl.BGS;
 
-import main.java.bgu.spl.net.api.Bidi.BidiMessagingProtocol;
-import main.java.bgu.spl.net.impl.rci.Command;
+import bgu.spl.net.api.Bidi.BidiMessagingProtocol;
+import bgu.spl.net.impl.rci.Command;
 
 import java.io.Serializable;
 

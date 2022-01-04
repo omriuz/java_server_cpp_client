@@ -1,11 +1,12 @@
-package main.java.bgu.spl.net.impl.BGS;
+package bgu.spl.net.impl.BGS;
 
-import main.java.bgu.spl.net.api.Bidi.Connections;
-import main.java.bgu.spl.net.srv.ConnectionHandler;
+import bgu.spl.net.api.Bidi.Connections;
+import bgu.spl.net.impl.rci.Message;
+import bgu.spl.net.srv.ConnectionHandler;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class Connections_Impl implements Connections {
+public class Connections_Impl implements Connections <Message> {
 
     private ConcurrentHashMap<Integer, ConnectionHandler> connectionHandlerHashMap;
     private Integer nextID;
@@ -16,7 +17,7 @@ public class Connections_Impl implements Connections {
     }
 
     @Override
-    public boolean send(int connectionId, Object msg) {
+    public boolean send(int connectionId, Message msg) {
         ConnectionHandler connectionHandler = connectionHandlerHashMap.get(connectionId);
         if (connectionHandler == null)
             return false;
@@ -25,7 +26,7 @@ public class Connections_Impl implements Connections {
     }
 
     @Override
-    public void broadcast(Object msg) {
+    public void broadcast(Message msg) {
         for (ConnectionHandler connectionHandler : connectionHandlerHashMap.values()) {
             connectionHandler.send(msg);
         }

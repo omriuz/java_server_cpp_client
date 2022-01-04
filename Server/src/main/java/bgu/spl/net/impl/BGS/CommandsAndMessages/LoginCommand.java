@@ -1,11 +1,10 @@
-package main.java.bgu.spl.net.impl.BGS.Commands;
+package bgu.spl.net.impl.BGS.CommandsAndMessages;
 
-import main.java.bgu.spl.net.impl.BGS.Connections_Impl;
-import main.java.bgu.spl.net.impl.BGS.DataBase;
-import main.java.bgu.spl.net.impl.rci.Command;
+import bgu.spl.net.impl.BGS.Connections_Impl;
+import bgu.spl.net.impl.BGS.DataBase;
+import bgu.spl.net.impl.rci.Command;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.logging.ErrorManager;
 
 public class LoginCommand implements Command {
     private DataBase dataBase;
@@ -28,7 +27,7 @@ public class LoginCommand implements Command {
         if(captcha) {
             login = dataBase.logIn(username, password, id);
             if (login) {
-                connections.send(id, new AckMessage());//TODO build the AckMessage
+                connections.send(id, new AckMessage(opCode));//TODO build the AckMessage
                 ConcurrentLinkedQueue<NotificationMessage> messageQueue = dataBase.getmessageQueue(username);
                 for (NotificationMessage m : messageQueue) {
                     connections.send(id, m);

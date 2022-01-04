@@ -1,26 +1,34 @@
-package main.java.bgu.spl.net.impl.BGS;
+package bgu.spl.net.impl.BGS;
 
-import main.java.bgu.spl.net.api.MessageEncoderDecoder;
-import java.io.ByteArrayInputStream;
+import bgu.spl.net.api.MessageEncoderDecoder;
+import bgu.spl.net.impl.BGS.CommandsAndMessages.*;
+import bgu.spl.net.impl.rci.Command;
+import bgu.spl.net.impl.rci.Communication;
+import com.google.gson.Gson;
+
 import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
-public class ObjectEncoderDecoder implements MessageEncoderDecoder<Serializable> {
+public class ObjectEncoderDecoder implements MessageEncoderDecoder<Communication> {
 
     private final ByteBuffer lengthBuffer = ByteBuffer.allocate(4);
+    private final ByteBuffer opCodeBuffer = ByteBuffer.allocate(2);
+    private short opCode;
     private byte[] objectBytes = null;
     private int objectBytesIndex = 0;
 
     @Override
-    public Serializable decodeNextByte(byte nextByte) {
-        if (objectBytes == null) { //indicates that we are still reading the length
-            lengthBuffer.put(nextByte);
-            if (!lengthBuffer.hasRemaining()) { //we read 4 bytes and therefore can take the length
+    public Communication decodeNextByte(byte nextByte) {
+        if (objectBytes == null) { //indicates that we are still reading the length and opCode
+            if(lengthBuffer.hasRemaining())
+                lengthBuffer.put(nextByte);
+            else if (opCodeBuffer.hasRemaining())
+                opCodeBuffer.put(nextByte);
+            if(!lengthBuffer.hasRemaining() && !opCodeBuffer.hasRemaining()) { //we read 6 bytes and therefore can take the length and op code
                 lengthBuffer.flip();
                 objectBytes = new byte[lengthBuffer.getInt()];
                 objectBytesIndex = 0;
@@ -29,28 +37,55 @@ public class ObjectEncoderDecoder implements MessageEncoderDecoder<Serializable>
         } else {
             objectBytes[objectBytesIndex] = nextByte;
             if (++objectBytesIndex == objectBytes.length) {
-                Serializable result = deserializeObject();
+                Command result = deserializeObject(opCode);
                 objectBytes = null;
                 return result;
             }
         }
-
         return null;
     }
 
     @Override
-    public byte[] encode(Serializable message) {
-        return serializeObject(message);
+    public byte[] encode(Communication message) {
+        //TODO: add the json conversion
+        return message.toString().getBytes(StandardCharsets.UTF_8);//TODO
     }
 
-    private Serializable deserializeObject() {
-        try {
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(objectBytes));
-            return (Serializable) in.readObject();
-        } catch (Exception ex) {
-            throw new IllegalArgumentException("cannot desrialize object", ex);
-        }
+    private Command deserializeObject(short opCode) {
+        String json = new String(objectBytes, StandardCharsets.UTF_8); //TODO change to the correct UTF
+        Gson gson = new Gson();
+        Command command = null;
+        switch (opCode){
+            case 1:
+                command = gson.fromJson(json, RegisterCommand.class);
+                break;
+            case 2:
+                command = gson.fromJson(json, LoginCommand.class);
+                break;
+            case 3:
+                command = gson.fromJson(json, LogoutCommand.class);
+                break;
+            case 4:
+                command = gson.fromJson(json, FollowUnfollowCommand.class);
+                break;
+            case 5:
+                command = gson.fromJson(json, PostCommand.class);
+                break;
+            case 6:
+                command = gson.fromJson(json, PMCommand.class);
+                break;
+            case 7:
+                command = gson.fromJson(json, LogStatCommand.class);
+                break;
+            case 8:
+                command = gson.fromJson(json, StatsCommand.class);
+                break;
+            case 12:
+                command = gson.fromJson(json, BlockCommand.class);
+                break;
 
+        }
+        return command;
     }
 
     private byte[] serializeObject(Serializable message) {

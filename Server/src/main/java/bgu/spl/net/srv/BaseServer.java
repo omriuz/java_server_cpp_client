@@ -1,8 +1,8 @@
-package main.java.bgu.spl.net.srv;
+package bgu.spl.net.srv;
 
-import main.java.bgu.spl.net.api.Bidi.BidiMessagingProtocol;
-import main.java.bgu.spl.net.api.MessageEncoderDecoder;
-import main.java.bgu.spl.net.impl.BGS.Connections_Impl;
+import bgu.spl.net.api.Bidi.BidiMessagingProtocol;
+import bgu.spl.net.api.MessageEncoderDecoder;
+import bgu.spl.net.impl.BGS.Connections_Impl;
 
 import java.io.IOException;
 import java.net.ServerSocket;
