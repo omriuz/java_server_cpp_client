@@ -50,7 +50,7 @@ public class ObjectEncoderDecoder implements MessageEncoderDecoder<Communication
 
     @Override
     public byte[] encode(Communication message) {
-        //TODO: add the json conversion
+        //TODO: decide between sending a String or sending a json formatted String
         return message.toString().getBytes(StandardCharsets.UTF_8);//TODO
     }
 

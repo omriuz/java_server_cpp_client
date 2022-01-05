@@ -2,10 +2,9 @@ package bgu.spl.net.impl.BGS;
 
 import bgu.spl.net.api.Bidi.BidiMessagingProtocol;
 import bgu.spl.net.impl.rci.Command;
+import bgu.spl.net.impl.rci.Communication;
 
-import java.io.Serializable;
-
-public class RemoteCommandInvocationProtocol implements BidiMessagingProtocol<Serializable> {
+public class RemoteCommandInvocationProtocol implements BidiMessagingProtocol<Communication> {
     private int connectionId;
     private Connections_Impl connections;
     private final DataBase dataBase;
@@ -21,8 +20,8 @@ public class RemoteCommandInvocationProtocol implements BidiMessagingProtocol<Se
     }
 
     @Override
-    public void process(Serializable msg) {
-         ((Command) msg).execute(dataBase,connections,connectionId);
+    public void process(Communication msg) {
+        ((Command)msg).execute(dataBase,connections,connectionId);
     }
 
     @Override

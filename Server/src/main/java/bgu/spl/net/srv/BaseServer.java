@@ -49,7 +49,6 @@ public abstract class BaseServer<T> implements Server<T> {
 
                 int id = connections.addNewHandler(handler);
                 protocol.start(id,connections);
-
                 execute(handler);
 
             }

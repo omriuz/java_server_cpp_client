@@ -1,7 +1,5 @@
 package bgu.spl.net.srv;
 
-import bgu.spl.net.api.Bidi.BidiMessagingProtocol;
-import bgu.spl.net.api.MessageEncoderDecoder;
 import bgu.spl.net.impl.BGS.ObjectEncoderDecoder;
 import bgu.spl.net.impl.BGS.RemoteCommandInvocationProtocol;
 import bgu.spl.net.impl.rci.Command;
@@ -12,7 +10,7 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class BlockingConnectionHandler implements Runnable, ConnectionHandler<Message> {
+public class BlockingConnectionHandler <Communication> implements Runnable, ConnectionHandler<Communication> {
 
     private final RemoteCommandInvocationProtocol protocol;
     private final ObjectEncoderDecoder encdec;
@@ -34,7 +32,7 @@ public class BlockingConnectionHandler implements Runnable, ConnectionHandler<Me
             int read;
             in = new BufferedInputStream(sock.getInputStream());
             while (!protocol.shouldTerminate() && connected && (read = in.read()) >= 0) {
-                Command nextMessage = encdec.decodeNextByte((byte) read);
+                Command nextMessage = (Command) encdec.decodeNextByte((byte) read);
                 if (nextMessage != null) {
                     protocol.process(nextMessage);
                 }
@@ -53,10 +51,10 @@ public class BlockingConnectionHandler implements Runnable, ConnectionHandler<Me
     }
 
     @Override
-    public synchronized void send(Message msg) {
+    public synchronized void send(Communication msg) {
         try (Socket sock = this.sock) {
             out = new BufferedOutputStream(sock.getOutputStream());
-            out.write(encdec.encode(msg));
+            out.write(encdec.encode((Message)msg));
             out.flush();
         }
         catch (IOException ex) {

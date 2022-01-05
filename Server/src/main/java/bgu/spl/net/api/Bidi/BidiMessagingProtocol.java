@@ -1,6 +1,6 @@
 package bgu.spl.net.api.Bidi;
 
-import main.java.bgu.spl.net.impl.BGS.Connections_Impl;
+import bgu.spl.net.impl.BGS.Connections_Impl;
 
 public interface BidiMessagingProtocol<T>  {
 	/**
