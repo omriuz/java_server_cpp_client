@@ -3,6 +3,8 @@ package bgu.spl.net.srv;
 import bgu.spl.net.api.Bidi.BidiMessagingProtocol;
 import bgu.spl.net.api.MessageEncoderDecoder;
 import bgu.spl.net.impl.BGS.Connections_Impl;
+import bgu.spl.net.impl.BGS.ObjectEncoderDecoder;
+import bgu.spl.net.impl.BGS.RemoteCommandInvocationProtocol;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -43,8 +45,8 @@ public abstract class BaseServer<T> implements Server<T> {
                 BidiMessagingProtocol protocol = protocolFactory.get();
                 BlockingConnectionHandler<T> handler = new BlockingConnectionHandler<T>(
                         clientSock,
-                        encdecFactory.get(),
-                        protocol
+                        (ObjectEncoderDecoder) encdecFactory.get(),
+                        (RemoteCommandInvocationProtocol) protocol
                         );
 
                 int id = connections.addNewHandler(handler);
