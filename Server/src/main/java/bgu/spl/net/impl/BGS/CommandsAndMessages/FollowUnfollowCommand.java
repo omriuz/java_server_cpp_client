@@ -10,7 +10,7 @@ public class FollowUnfollowCommand implements Command {
     private boolean followUnfollow;
     private int opCode;
 
-    public void FollowUnfollowCommand(String userName, boolean followUnfollow){
+    public FollowUnfollowCommand(String userName, boolean followUnfollow){
         this.userName = userName;
         this.followUnfollow = followUnfollow;
         this.opCode = 4;

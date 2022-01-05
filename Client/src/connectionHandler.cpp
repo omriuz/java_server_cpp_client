@@ -28,6 +28,7 @@ bool ConnectionHandler::connect() {
         std::cerr << "Connection failed (Error: " << e.what() << ')' << std::endl;
         return false;
     }
+    std::cout << "succses" <<endl;
     return true;
 }
  
@@ -64,11 +65,17 @@ bool ConnectionHandler::sendBytes(const char bytes[], int bytesToWrite) {
 }
  
 bool ConnectionHandler::getLine(std::string& line) {
-    return getFrameAscii(line, '\n');
+    return getFrameAscii(line, '\0');
 }
 
-bool ConnectionHandler::sendLine(std::string& line) {
-    return sendFrameAscii(line, '\n');
+bool ConnectionHandler::sendLine(std::string& line,short opCode, short length) {
+    char opCodeBytes[2];
+    shortToBytes(opCode,opCodeBytes);
+    char lengthBytes[2];
+    shortToBytes(length,lengthBytes);
+    sendBytes(lengthBytes,2);
+    sendBytes(opCodeBytes,2);
+    return sendFrameAscii(line);
 }
  
 bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
@@ -87,10 +94,8 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
     return true;
 }
  
-bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter) {
-	bool result=sendBytes(frame.c_str(),frame.length());
-	if(!result) return false;
-	return sendBytes(&delimiter,1);
+bool ConnectionHandler::sendFrameAscii(const std::string& frame) {
+	return sendBytes(frame.c_str(),frame.length());
 }
  
 // Close down the connection properly.
@@ -100,4 +105,9 @@ void ConnectionHandler::close() {
     } catch (...) {
         std::cout << "closing failed: connection already closed" << std::endl;
     }
+}
+
+void ConnectionHandler::shortToBytes(short num, char* bytesArr){
+    bytesArr[0] = ((num >> 8) & 0xFF);
+    bytesArr[1] = (num & 0xFF);
 }

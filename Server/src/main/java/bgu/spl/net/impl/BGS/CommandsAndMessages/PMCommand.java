@@ -10,13 +10,11 @@ import java.util.LinkedList;
 public class PMCommand implements Command {
     private String receiveUserName;
     private String content;
-    private String sendingTime;
     private int opCode;
 
-    public void PMCommand(String receiveUserName, String content, String sendingTime){
+    public PMCommand(String receiveUserName, String content){
         this.receiveUserName = receiveUserName;
         this.content = content;
-        this.sendingTime = sendingTime;
         this.opCode = 6;
     }
 

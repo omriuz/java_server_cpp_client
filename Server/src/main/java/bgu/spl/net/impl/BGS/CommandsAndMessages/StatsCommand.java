@@ -11,7 +11,7 @@ public class StatsCommand implements Command {
     private int opCode;
     private LinkedList<String> userNames;
 
-    public void StatsCommand(LinkedList<String> userNames){
+    public StatsCommand(LinkedList<String> userNames){
         this.opCode = 8;
         this.userNames = userNames;
     }

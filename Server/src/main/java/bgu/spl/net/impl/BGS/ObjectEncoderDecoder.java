@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ObjectEncoderDecoder implements MessageEncoderDecoder<Communication> {
 
-    private final ByteBuffer lengthBuffer = ByteBuffer.allocate(4);
+    private final ByteBuffer lengthBuffer = ByteBuffer.allocate(2);
     private final ByteBuffer opCodeBuffer = ByteBuffer.allocate(2);
     private short opCode;
     private byte[] objectBytes = null;
@@ -28,9 +28,9 @@ public class ObjectEncoderDecoder implements MessageEncoderDecoder<Communication
                 lengthBuffer.put(nextByte);
             else if (opCodeBuffer.hasRemaining())
                 opCodeBuffer.put(nextByte);
-            if(!lengthBuffer.hasRemaining() && !opCodeBuffer.hasRemaining()) { //we read 6 bytes and therefore can take the length and op code
+            if(!lengthBuffer.hasRemaining() && !opCodeBuffer.hasRemaining()) { //we read 4 bytes and therefore can take the length and op code
                 lengthBuffer.flip();
-                objectBytes = new byte[lengthBuffer.getInt()];
+                objectBytes = new byte[lengthBuffer.getShort()];
                 objectBytesIndex = 0;
                 lengthBuffer.clear();
                 opCodeBuffer.flip();
@@ -51,11 +51,12 @@ public class ObjectEncoderDecoder implements MessageEncoderDecoder<Communication
     @Override
     public byte[] encode(Communication message) {
         //TODO: decide between sending a String or sending a json formatted String
-        return message.toString().getBytes(StandardCharsets.UTF_8);//TODO
+        String toReturn = message.toString() +"\0";
+        return toReturn.getBytes(StandardCharsets.UTF_8);//TODO
     }
 
     private Command deserializeObject(short opCode) {
-        String json = new String(objectBytes, StandardCharsets.UTF_8); //TODO change to the correct UTF
+        String json = new String(objectBytes, StandardCharsets.UTF_8); 
         Gson gson = new Gson();
         Command command = null;
         switch (opCode){
