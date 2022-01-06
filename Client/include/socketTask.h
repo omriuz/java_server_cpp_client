@@ -11,6 +11,7 @@ public:
     void operator()();
     short bytesToShort(char* bytesArr);
     bool isAckMessageForLogout(std::string answer);
+    void printMessage(std::string answer);
 
 private:
     ConnectionHandler &handler;

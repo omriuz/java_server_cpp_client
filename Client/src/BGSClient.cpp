@@ -26,9 +26,8 @@ int main (int argc, char *argv[]) {
     std::thread socketThread = std::thread(socketTask(connectionHandler));
     
     //TODO: make sure to close the threads correctly
-    keyBoardThread.join();
     socketThread.join();
+    keyBoardThread.join();
     
-	
     return 0;
 }

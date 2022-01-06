@@ -8,17 +8,17 @@ public class RegisterCommand implements Command {
     private final String userName;
     private final String password;
     private final String birthday;
-    private final int opCode;
+    private int opCode;
 
     public RegisterCommand(String userName, String password, String birthday) {
         this.userName = userName;
         this.password = password;
         this.birthday = birthday;
-        this.opCode = 1;
     }
 
     @Override
     public void execute(DataBase dataBase, Connections_Impl connections, int connectionId) {
+        this.opCode = 1;
         boolean toReturn = dataBase.register(this,connectionId);
         connections.send(connectionId,toReturn ? new AckMessage(opCode) : new ErrorMessage(opCode));
     }
@@ -34,5 +34,8 @@ public class RegisterCommand implements Command {
 
     public String getBirthday() {
         return birthday;
+    }
+    public String toString(){
+        return "userName: " + userName + "\npassword: " + password +"\nbirthday: " + birthday; 
     }
 }

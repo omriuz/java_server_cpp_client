@@ -1,7 +1,6 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory '/home/spl211/Assignment_3/SPL-Assignment_3'
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/spl211/Assignment3/SPL-Assignment_3'
+make: Leaving directory '/home/spl211/Assignment3/SPL-Assignment_3'
  
 make: *** No targets specified and no makefile found.  Stop.
- 
-make: Leaving directory '/home/spl211/Assignment_3/SPL-Assignment_3'
  

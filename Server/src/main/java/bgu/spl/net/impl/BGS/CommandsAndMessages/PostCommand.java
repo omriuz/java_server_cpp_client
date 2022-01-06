@@ -15,11 +15,11 @@ public class PostCommand implements Command {
     public PostCommand(String content) {
         this.content = content;
         this.taggedUsersNames = getTaggedUsersNames(content);
-        this.opCode = 5;
     }
 
     @Override
     public void execute(DataBase dataBase, Connections_Impl connections, int connectionId) {
+        this.opCode = 5;
         boolean valid = dataBase.isValid(connectionId);
         connections.send(connectionId,valid ? new AckMessage(opCode) : new ErrorMessage(opCode));
         if(valid){

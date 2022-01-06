@@ -5,14 +5,15 @@ import bgu.spl.net.impl.BGS.DataBase;
 import bgu.spl.net.impl.rci.Command;
 
 public class LogoutCommand implements Command {
-    private final int opCode;
+    private int opCode;
 
     public LogoutCommand(int opCode) {
-        this.opCode = 3;
+        
     }
 
     @Override
     public void execute(DataBase dataBase, Connections_Impl connections, int connectionId) {
+        this.opCode = 3;
         boolean toReturn = dataBase.logOut(connectionId);
         connections.send(connectionId,toReturn ? new AckMessage(opCode): new ErrorMessage(opCode));
     }

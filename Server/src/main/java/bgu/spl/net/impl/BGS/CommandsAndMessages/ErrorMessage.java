@@ -10,4 +10,8 @@ public class ErrorMessage implements Message {
         this.opCode = 11;
         this.messageOpCode = messageOpCode;
     }
+    
+    public String toString(){
+        return String.valueOf(opCode) + " " + String.valueOf(messageOpCode);
+    }
 }

@@ -15,13 +15,14 @@ void keyBoardTask::operator()() {
         std::cin.getline(buf, bufsize);
 		std::string line(buf);
         line = editMessage(line);
+        std::cout << line; 
 		short length=line.length();
         if (!handler.sendLine(line,opCode,length)) {
-            std::cout << "Disconnected. Exiting...\n" << std::endl;
+            std::cout << "keyBoardTask: Disconnected. Exiting...\n" << std::endl;
             break;
         }
 		// connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
-        std::cout << "Sent " << length+1 << " bytes to server" << std::endl;
+        std::cout << "keyBoardTask: Sent " << length+1 << " bytes to server" << std::endl;
     }
     }
 std::string keyBoardTask::editMessage(std::string rawMsg){
@@ -75,9 +76,9 @@ std::string keyBoardTask::toJsonRegister(std::string rawMessage){
     std::getline(stream ,password , ' ');
     std::getline(stream ,birthday , ' ');
 
-    root.put("RegisterCommand .userName", userName);
-    root.put("RegisterCommand .password", password);
-    root.put("RegisterCommand .birthday", birthday);
+    root.put("userName", userName);
+    root.put("password", password);
+    root.put("birthday", birthday);
 
     boost::property_tree::write_json(json, root);
     return json.str();
@@ -95,13 +96,20 @@ std::string keyBoardTask::toJsonLogin(std::string rawMessage){
     std::string password;
     std::string captcha;
 
+    std::cout << captcha;
     std::getline(stream ,userName , ' ');
     std::getline(stream ,password , ' ');
     std::getline(stream ,captcha , ' ');
 
-    root.put("LoginCommand .userName", userName);
-    root.put("LoginCommand .password", password);
-    root.put("LoginCommand .captcha", captcha);
+    if(captcha.compare("1") == 0){
+        captcha = "true";
+    }else{
+        captcha = "false";
+    }
+    
+    root.put("userName", userName);
+    root.put("password", password);
+    root.put("captcha", captcha);
 
     boost::property_tree::write_json(json, root);
     return json.str();
@@ -110,7 +118,7 @@ std::string keyBoardTask::toJsonLogout(std::string rawMessage){
     ptree root;
     std::stringstream json;
 
-    root.put("LogoutCommand .opCode", rawMessage);
+    root.put("opCode", rawMessage);
 
     boost::property_tree::write_json(json, root);
     return json.str();
@@ -129,10 +137,10 @@ std::string keyBoardTask::toJsonFollow(std::string rawMessage){
     std::getline(stream ,userName , ' ');
 
     if(followUnFollow.compare("0") == 0){
-        root.put("FollowUnfollowCommand .followUnfollow", "false");}
+        root.put("followUnfollow", "false");}
     else
-        root.put("FollowUnfollowCommand .followUnfollow", "true");
-    root.put("FollowUnfollowCommand .userName", userName);
+        root.put("followUnfollow", "true");
+    root.put("userName", userName);
 
     boost::property_tree::write_json(json, root);
     return json.str();
@@ -144,7 +152,7 @@ std::string keyBoardTask::toJsonPost(std::string rawMessage){
     std::string editMessage = rawMessage.substr(index + 1);
     std::stringstream json;
 
-    root.put("PostCommand .content", editMessage);
+    root.put("content", editMessage);
 
     boost::property_tree::write_json(json, root);
     return json.str();
@@ -160,8 +168,8 @@ std::string keyBoardTask::toJsonPM(std::string rawMessage){
     std::stringstream json;
 
     //TODO: make sure that we dont need to send the sending time
-    root.put("PMCommand.receiveUserName",userName);
-    root.put("PMCommand.content",content);
+    root.put("receiveUserName",userName);
+    root.put("content",content);
 
     boost::property_tree::write_json(json, root);
     return json.str();
@@ -169,7 +177,7 @@ std::string keyBoardTask::toJsonPM(std::string rawMessage){
 }
 std::string keyBoardTask::toJsonLogStat(std::string rawMessage){
     ptree root;
-    root.put("LogStatCommand .opCode", rawMessage);
+    root.put("opCode", rawMessage);
     std::stringstream json;
 
     boost::property_tree::write_json(json, root);
@@ -187,7 +195,7 @@ std::string keyBoardTask::toJsonStat(std::string rawMessage){
     std::string currentName = "";
     std::string prevName = "";
     std::getline(namesStream, currentName, ' ');
-    
+
     do{
         name.put_value(currentName);
         users.push_back(std::make_pair("",name));
@@ -206,7 +214,7 @@ std::string keyBoardTask::toJsonBlock(std::string rawMessage){
     std::string editMessage = rawMessage.substr(index + 1);
     std::stringstream json;
 
-    root.put("BlockCommand .userName", editMessage);
+    root.put("userName", editMessage);
 
     boost::property_tree::write_json(json, root);
     return json.str();

@@ -12,11 +12,11 @@ public class StatsCommand implements Command {
     private LinkedList<String> userNames;
 
     public StatsCommand(LinkedList<String> userNames){
-        this.opCode = 8;
         this.userNames = userNames;
     }
     @Override
     public void execute(DataBase dataBase, Connections_Impl connections, int id) {
+        this.opCode = 8;
         boolean stat = false;
         BgsUser activeUser = dataBase.getUser(id);
         if(activeUser != null && activeUser.isLogIn()){

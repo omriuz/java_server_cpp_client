@@ -4,6 +4,8 @@ import bgu.spl.net.api.MessageEncoderDecoder;
 import bgu.spl.net.impl.BGS.CommandsAndMessages.*;
 import bgu.spl.net.impl.rci.Command;
 import bgu.spl.net.impl.rci.Communication;
+import bgu.spl.net.impl.rci.Message;
+
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
@@ -12,6 +14,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+
+import javax.sound.sampled.SourceDataLine;
 
 public class ObjectEncoderDecoder implements MessageEncoderDecoder<Communication> {
 
@@ -51,20 +55,24 @@ public class ObjectEncoderDecoder implements MessageEncoderDecoder<Communication
     @Override
     public byte[] encode(Communication message) {
         //TODO: decide between sending a String or sending a json formatted String
-        String toReturn = message.toString() +"\0";
+        String toReturn = ((Message)message).toString() +"\0";
+        System.out.println("reached the encoder encode method " + toReturn);
         return toReturn.getBytes(StandardCharsets.UTF_8);//TODO
     }
 
     private Command deserializeObject(short opCode) {
-        String json = new String(objectBytes, StandardCharsets.UTF_8); 
+        String json = new String(objectBytes, StandardCharsets.UTF_8);
+        System.out.println(json); 
         Gson gson = new Gson();
         Command command = null;
         switch (opCode){
             case 1:
                 command = gson.fromJson(json, RegisterCommand.class);
+                System.out.println(((RegisterCommand)command).toString());
                 break;
             case 2:
                 command = gson.fromJson(json, LoginCommand.class);
+                System.out.println(((LoginCommand)command).toString());
                 break;
             case 3:
                 command = gson.fromJson(json, LogoutCommand.class);

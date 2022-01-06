@@ -15,11 +15,12 @@ public class PMCommand implements Command {
     public PMCommand(String receiveUserName, String content){
         this.receiveUserName = receiveUserName;
         this.content = content;
-        this.opCode = 6;
+        
     }
 
     @Override
     public void execute(DataBase dataBase, Connections_Impl connections, int id) {
+        this.opCode = 6;
         boolean send = false;
         BgsUser sendingUser = dataBase.getUser(id);
         BgsUser receiveUser = dataBase.getUser(receiveUserName);

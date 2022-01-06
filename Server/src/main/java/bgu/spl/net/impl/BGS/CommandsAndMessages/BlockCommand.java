@@ -11,11 +11,11 @@ public class BlockCommand implements Command {
 
     public BlockCommand(String userName) {
         this.userName = userName;
-        this.opCode = 12;
     }
 
     @Override
     public void execute(DataBase dataBase, Connections_Impl connections, int connectionId) {
+        this.opCode = 12;
         boolean valid = dataBase.isValid(connectionId) && dataBase.isRegistered(userName);
         if(!valid)
             connections.send(connectionId,new ErrorMessage(opCode));

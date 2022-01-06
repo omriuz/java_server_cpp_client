@@ -9,14 +9,15 @@ import java.util.List;
 
 public class LogStatCommand implements Command {
 
-    private final int opCode;
+    private int opCode;
 
     public LogStatCommand() {
-        this.opCode = 7;
+
     }
 
     @Override
     public void execute(DataBase dataBase, Connections_Impl connections, int connectionId) {
+        this.opCode = 7;
         boolean valid = dataBase.isValid(connectionId);
         if(!valid)
             connections.send(connectionId,new ErrorMessage(opCode));

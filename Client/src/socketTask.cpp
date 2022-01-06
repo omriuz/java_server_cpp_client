@@ -23,9 +23,9 @@ void socketTask::operator()() {
 		// A C string must end with a 0 char delimiter.  When we filled the answer buffer from the socket
 		// we filled up to the \n char - we must make sure now that a 0 char is also present. So we truncate last character.
         answer.resize(len-1);
-        std::cout << answer << std::endl;
+        printMessage(answer);
         if(isAckMessageForLogout(answer)){
-            std::cout << "Exiting...\n" << std::endl;
+            std::cout << "SocketTask: Exiting...\n" << std::endl;
             break;
         }
     }
@@ -48,4 +48,25 @@ bool socketTask::isAckMessageForLogout(std::string answer){
         return false;
     return true;
     
+}
+
+void socketTask::printMessage(std::string answer){
+    std::stringstream stream(answer);
+    std::string opCode;
+    std::string sentFor;
+    std::string moreInfo;
+    std::getline(stream,opCode,' ');
+    std::getline(stream,sentFor,' ');
+    std::getline(stream,moreInfo,' ');
+    std::string toPrint = "";
+    if(opCode.compare("10")==0)
+        toPrint += "ACKMessage for ";
+    else if(opCode.compare("11")==0)
+        toPrint += "ErrorMessage for: ";
+    else 
+        toPrint += "NOTFICATION MESSAGE : ";
+    toPrint += sentFor;
+    toPrint += moreInfo;
+
+    std::cout<< toPrint <<endl;
 }

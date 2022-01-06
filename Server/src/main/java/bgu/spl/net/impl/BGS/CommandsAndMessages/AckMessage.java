@@ -19,6 +19,12 @@ public class AckMessage implements Message {
         this.optionalInformation = "";
     }
 
+    public String toString() {
+        System.out.println("sent to: " + String.valueOf(sentFor));
+        return String.valueOf(opCode) + " " + String.valueOf(sentFor) + " " + String.valueOf(optionalInformation);
+        
+    }
+
 
 
 }
