@@ -177,16 +177,25 @@ std::string keyBoardTask::toJsonLogStat(std::string rawMessage){
     
 }
 std::string keyBoardTask::toJsonStat(std::string rawMessage){
+    std::size_t index = rawMessage.find(' ');
+    std::string editMessage = rawMessage.substr(index + 1);
     std::stringstream json;
+    std::stringstream namesStream(editMessage);
     ptree root;
     ptree users;
     ptree name;
-    for(int i = 0; i < 3; i++) // for all the user list
-    {
-        name.put_value("the user name from the list");
+    std::string currentName = "";
+    std::string prevName = "";
+    std::getline(namesStream, currentName, ' ');
+    
+    do{
+        name.put_value(currentName);
         users.push_back(std::make_pair("",name));
+        prevName = currentName;
+        std::getline(namesStream, currentName, ' ');
     }
-    //TODO: 
+    while (currentName.compare(prevName) !=0);
+
     root.add_child("userNames", users);
     boost::property_tree::write_json(json, root);
     return json.str();
