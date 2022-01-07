@@ -92,6 +92,13 @@ public class BgsUser {
         return followersNames;
     }
 
+    public void addToFollowers(String userName){
+        followersNames.add(userName);
+    }
+    public void removeFromFollowers(String userName){
+        followersNames.remove(userName);
+    }
+
     public List<String> getFollowings() {
         return followings;
     }

@@ -13,11 +13,12 @@ public class FollowUnfollowCommand implements Command {
     public FollowUnfollowCommand(String userName, boolean followUnfollow){
         this.userName = userName;
         this.followUnfollow = followUnfollow;
-        this.opCode = 4;
+
     }
 
     @Override
     public void execute(DataBase dataBase, Connections_Impl connections, int id) {
+        this.opCode = 4;
         boolean success = false;
         Message backMessage = null;
         if(followUnfollow & !dataBase.getUser(id).isBlockingMe(dataBase.getUser(userName))) // check if blocked

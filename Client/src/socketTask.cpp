@@ -53,20 +53,33 @@ bool socketTask::isAckMessageForLogout(std::string answer){
 void socketTask::printMessage(std::string answer){
     std::stringstream stream(answer);
     std::string opCode;
-    std::string sentFor;
-    std::string moreInfo;
     std::getline(stream,opCode,' ');
-    std::getline(stream,sentFor,' ');
-    std::getline(stream,moreInfo,' ');
     std::string toPrint = "";
     if(opCode.compare("10")==0)
-        toPrint += "ACKMessage for ";
+        toPrint = "ACKM ";
     else if(opCode.compare("11")==0)
-        toPrint += "ErrorMessage for: ";
+        toPrint = "Error ";
     else 
-        toPrint += "NOTFICATION MESSAGE : ";
+        toPrint = "NOTFICATION ";
+    if(toPrint.compare("NOTFICATION ")==0){
+        std::string privateOrPublic;
+        std::string PostingUSer;
+        std::string content;
+        std::getline(stream,privateOrPublic,' ');
+        std::getline(stream,PostingUSer,' ');
+        std::getline(stream,content,'&');
+        toPrint += privateOrPublic;
+        toPrint += PostingUSer;
+        toPrint += content;
+    }
+    else{
+    std::string sentFor;
+    std::string moreInfo;
+    std::getline(stream,sentFor,' ');
+    std::getline(stream,moreInfo,' ');
     toPrint += sentFor;
     toPrint += moreInfo;
+    }
 
     std::cout<< toPrint <<endl;
 }

@@ -9,12 +9,11 @@ import java.util.List;
 
 public class PostCommand implements Command {
     private final String content;
-    private final List<String> taggedUsersNames;
-    private final int opCode;
+    private List<String> taggedUsersNames;
+    private int opCode;
 
     public PostCommand(String content) {
         this.content = content;
-        this.taggedUsersNames = getTaggedUsersNames(content);
     }
 
     @Override
@@ -25,8 +24,9 @@ public class PostCommand implements Command {
         if(valid){
             BgsUser currentUser = dataBase.getUser(connectionId);
             currentUser.addPost(content);
+            this.taggedUsersNames = getTaggedUsersNames(content);
             sendPost(currentUser.getFollowersNames(),dataBase,currentUser,connections);
-            sendPost(taggedUsersNames,dataBase,currentUser,connections);
+            // sendPost(taggedUsersNames,dataBase,currentUser,connections);
         }
     }
 

@@ -27,7 +27,9 @@ int main (int argc, char *argv[]) {
     
     //TODO: make sure to close the threads correctly
     socketThread.join();
-    keyBoardThread.join();
+    //TODO: check thow to close the thread in right way
+    keyBoardThread.~thread();
+    // keyBoardThread.join();
     
     return 0;
 }

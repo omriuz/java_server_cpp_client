@@ -54,8 +54,10 @@ public class DataBase {
     public boolean follow(int connectionId, String userName){
         BgsUser askUser = usersByConnectionId.get(connectionId);
         boolean success = false;
-        if(askUser != null)
+        if(askUser != null){
             success = askUser.follow(userName);
+            users.get(userName).addToFollowers(askUser.getUserName());
+        }
         return success;
     }
 
@@ -64,6 +66,7 @@ public class DataBase {
         boolean success = false;
         if(askUser != null)
             success = askUser.unFollow(userName);
+            users.get(userName).removeFromFollowers(askUser.getUserName());
         return success;
     }
     public ConcurrentLinkedQueue<NotificationMessage> getmessageQueue(String userName){

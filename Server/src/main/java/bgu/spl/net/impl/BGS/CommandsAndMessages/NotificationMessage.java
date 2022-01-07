@@ -15,4 +15,9 @@ public class NotificationMessage implements Message {
         this.opCode = 9;
     }
 
+    public String toString() {
+        return String.valueOf(opCode) + " " + String.valueOf(notificationType) + " " + String.valueOf(postingUser) + " " + String.valueOf(content);
+        
+    }
+
 }
