@@ -128,6 +128,7 @@ public class BgsUser {
         numOfPosts++;
     }
     public void addPM(String receiveUserName, String PMContent){
+        pmsSent.putIfAbsent(receiveUserName, new LinkedList<>());
         pmsSent.get(receiveUserName).add(PMContent);
     }
 

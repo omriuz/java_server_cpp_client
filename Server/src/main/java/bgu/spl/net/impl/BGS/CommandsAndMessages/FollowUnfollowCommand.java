@@ -17,7 +17,7 @@ public class FollowUnfollowCommand implements Command {
     }
 
     @Override
-    public void execute(DataBase dataBase, Connections_Impl connections, int id) {
+    public void execute(DataBase dataBase, Connections_Impl connections, int id) { //TODO crash when doing follow to someone not register
         this.opCode = 4;
         boolean success = false;
         Message backMessage = null;

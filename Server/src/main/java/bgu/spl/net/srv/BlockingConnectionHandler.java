@@ -52,13 +52,13 @@ public class BlockingConnectionHandler <Communication> implements Runnable, Conn
 
     @Override
     public synchronized void send(Communication msg) {
-        System.out.println("reached the blocking connection handel send method");
+        // System.out.println("reached the blocking connection handel send method");
         try {
             Socket sock = this.sock;
             out = new BufferedOutputStream(sock.getOutputStream());
             out.write(encdec.encode((Message)msg));
             out.flush();
-            System.out.println("flushed the string out of the socket");
+            // System.out.println("flushed the string out of the socket");
         }
         catch (IOException ex) {
         ex.printStackTrace();

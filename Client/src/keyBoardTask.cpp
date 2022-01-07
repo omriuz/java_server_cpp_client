@@ -15,14 +15,14 @@ void keyBoardTask::operator()() {
         std::cin.getline(buf, bufsize);
 		std::string line(buf);
         line = editMessage(line);
-        std::cout << line; 
+        // std::cout << line; 
 		short length=line.length();
         if (!handler.sendLine(line,opCode,length)) {
-            std::cout << "keyBoardTask: Disconnected. Exiting...\n" << std::endl;
+            // std::cout << "keyBoardTask: Disconnected. Exiting...\n" << std::endl;
             break;
         }
 		// connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
-        std::cout << "keyBoardTask: Sent " << length+1 << " bytes to server" << std::endl;
+        // std::cout << "keyBoardTask: Sent " << length+1 << " bytes to server" << std::endl;
     }
     }
 std::string keyBoardTask::editMessage(std::string rawMsg){
@@ -137,9 +137,9 @@ std::string keyBoardTask::toJsonFollow(std::string rawMessage){
     std::getline(stream ,userName , ' ');
 
     if(followUnFollow.compare("0") == 0){
-        root.put("followUnfollow", "false");}
+        root.put("followUnfollow", "true");}
     else
-        root.put("followUnfollow", "true");
+        root.put("followUnfollow", "false");
     root.put("userName", userName);
 
     boost::property_tree::write_json(json, root);
@@ -194,13 +194,13 @@ std::string keyBoardTask::toJsonStat(std::string rawMessage){
     ptree name;
     std::string currentName = "";
     std::string prevName = "";
-    std::getline(namesStream, currentName, ' ');
+    std::getline(namesStream, currentName, '|');
 
     do{
         name.put_value(currentName);
         users.push_back(std::make_pair("",name));
         prevName = currentName;
-        std::getline(namesStream, currentName, ' ');
+        std::getline(namesStream, currentName, '|');
     }
     while (currentName.compare(prevName) !=0);
 

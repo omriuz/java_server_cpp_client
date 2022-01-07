@@ -20,7 +20,7 @@ public class AckMessage implements Message {
     }
 
     public String toString() {
-        System.out.println("sent to: " + String.valueOf(sentFor));
+        // System.out.println("sent to: " + String.valueOf(sentFor));
         return String.valueOf(opCode) + " " + String.valueOf(sentFor) + " " + String.valueOf(optionalInformation);
         
     }

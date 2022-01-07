@@ -56,9 +56,9 @@ void socketTask::printMessage(std::string answer){
     std::getline(stream,opCode,' ');
     std::string toPrint = "";
     if(opCode.compare("10")==0)
-        toPrint = "ACKM ";
+        toPrint = "ACK ";
     else if(opCode.compare("11")==0)
-        toPrint = "Error ";
+        toPrint = "ERROR ";
     else 
         toPrint = "NOTFICATION ";
     if(toPrint.compare("NOTFICATION ")==0){
@@ -68,15 +68,19 @@ void socketTask::printMessage(std::string answer){
         std::getline(stream,privateOrPublic,' ');
         std::getline(stream,PostingUSer,' ');
         std::getline(stream,content,'&');
-        toPrint += privateOrPublic;
-        toPrint += PostingUSer;
-        toPrint += content;
+        if(privateOrPublic.compare("0")==0)
+            toPrint += "PM";
+        else
+            toPrint += "PUBLIC";
+        toPrint +=" " + PostingUSer;
+        toPrint +=" " + content;
     }
     else{
     std::string sentFor;
     std::string moreInfo;
     std::getline(stream,sentFor,' ');
-    std::getline(stream,moreInfo,' ');
+    //TODO: change the delimiter to the correct one 
+    std::getline(stream,moreInfo,'^');
     toPrint += sentFor;
     toPrint += moreInfo;
     }
