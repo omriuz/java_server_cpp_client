@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jan  8 16:51:13 2022
+# Make data base, printed on Sat Jan  8 16:58:03 2022
 
 # Variables
 
@@ -20,8 +20,6 @@ GNUMAKEFLAGS :=
 DESKTOP_SESSION = ubuntu
 # default
 .SHELLFLAGS := -c
-# environment
-SNAP_COMMON = /var/snap/code/common
 # environment
 XDG_SESSION_TYPE = x11
 # environment
@@ -43,39 +41,35 @@ CURDIR := /home/spl211/Assignment3/SPL-Assignment_3
 # makefile
 SHELL = /bin/sh
 # environment
-SNAP_DATA = /var/snap/code/85
-# environment
 VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # environment
-_ = /snap/code/85/usr/share/code/code
+_ = /usr/share/code/code
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
-SNAP_INSTANCE_NAME = code
-# environment
-SNAP_ARCH = amd64
+MOZ_CRASHREPORTER_RESTART_ARG_0 = /usr/bin/firefox
 # makefile
 MAKEFILE_LIST := 
 # automatic
 @F = $(notdir $@)
 # environment
-GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.desktop
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code-url-handler.desktop
 # environment
 USERNAME = spl211
 # environment
-XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+XRE_RESTARTED_BY_PROFILE_MANAGER = 
 # environment
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
+# environment
+MOZ_CRASHREPORTER_RESTART_ARG_1 = -new-window
 # environment
 CLUTTER_IM_MODULE = xim
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 VSCODE_CWD = /home/spl211
-# environment
-GSETTINGS_SCHEMA_DIR = /snap/code/85/usr/share/glib-2.0/schemas
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -87,23 +81,13 @@ SESSION_MANAGER = local/spl211:@/tmp/.ICE-unix/1225,unix/spl211:/tmp/.ICE-unix/1
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-GDK_PIXBUF_MODULE_FILE = /home/spl211/snap/code/common/.cache/gdk-pixbuf-loaders.cache
-# environment
 TEXTDOMAIN = im-config
-# environment
-SNAP = /snap/code/85
-# environment
-SNAP_VERSION = 899d46d8
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
 VSCODE_LOG_STACK = false
 # environment
-DISABLE_WAYLAND = 1
-# environment
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=358c026d-dcad-4209-83ce-93d874fcddfd&iid=358c026d-dcad-4209-83ce-93d874fcddfd&sid=358c026d-dcad-4209-83ce-93d874fcddfd","uploadToServer":true}
-# environment
-GDK_PIXBUF_MODULEDIR = /snap/code/85/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -113,17 +97,17 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 1825
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3294
 # automatic
 %F = $(notdir $%)
 # environment
 DISPLAY = :0
 # environment
+MOZ_CRASHREPORTER_RESTART_ARG_2 = 
+# environment
 GTK_IM_MODULE = ibus
 # environment
 VSCODE_PIPE_LOGGING = true
-# environment
-SNAP_INSTANCE_KEY = 
 # environment
 PWD = /home/spl211/Assignment3/SPL-Assignment_3
 # environment
@@ -133,7 +117,15 @@ SSH_AGENT_PID = 1352
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
+XUL_APP_FILE = 
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+XRE_START_OFFLINE = 
+# environment
 GTK_MODULES = gail:atk-bridge
+# environment
+MOZ_APP_LAUNCHER = /usr/bin/firefox
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
 # environment
@@ -141,21 +133,13 @@ HOME = /home/spl211
 # environment
 LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
-VSCODE_CLI = 1
-# environment
-VSCODE_CODE_CACHE_PATH = /home/spl211/.config/Code/CachedData/899d46d82c4c95423fb7e10e68eba52050e30ba3
+VSCODE_CODE_CACHE_PATH = /home/spl211/.config/Code/CachedData/f4af3cbf5a99787542e2a30fe1fd37cd644cc31f
 # environment
 LOGNAME = spl211
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
-SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
-# environment
-SNAP_CONTEXT = CdNfTlwxApNHIycQ2H12LBkaLf42sI7S7-feOMNYr_wF9mceu_6n
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
-# environment
-SNAP_USER_COMMON = /home/spl211/snap/code/common
+MOZ_ASSUME_USER_NS = 1
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -168,8 +152,6 @@ GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 XDG_VTNR = 1
 # environment
 MAKELEVEL := 0
-# environment
-SNAP_REAL_HOME = /home/spl211
 # default
 MAKE = $(MAKE_COMMAND)
 # default
@@ -177,19 +159,17 @@ MAKECMDGOALS := all
 # environment
 QT_IM_MODULE = ibus
 # environment
-SNAP_USER_DATA = /home/spl211/snap/code/85
-# environment
 SHLVL = 1
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b424bfaf-27a9-437b-a49f-987644eb6dc8.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-874393dc-26eb-4da2-b358-fec3d68c3ffc.sock
 # environment
 XDG_SESSION_ID = 1
 # environment
 USER = spl211
 # environment
-SNAP_REVISION = 85
+MOZ_LAUNCHED_CHILD = 
 # makefile
 .DEFAULT_GOAL := 
 # environment
@@ -203,11 +183,13 @@ MAKE_COMMAND := make
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-c561ef83-1.63.2-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-c561ef83-1.62.1-main.sock
 # environment
-BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
+XRE_PROFILE_LOCAL_PATH = 
 # makefile
 MAKEFLAGS = pqrR
+# environment
+XRE_BINARY_PATH = 
 # environment
 MFLAGS = -pqrR
 # automatic
@@ -226,16 +208,14 @@ QT_ACCESSIBILITY = 1
 TEXTDOMAINDIR = /usr/share/locale/
 # default
 MAKEFILES := 
-# environment
-SNAP_COOKIE = CdNfTlwxApNHIycQ2H12LBkaLf42sI7S7-feOMNYr_wF9mceu_6n
 # automatic
 <F = $(notdir $<)
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-SNAP_NAME = code
-# environment
 LC_ALL = C
+# environment
+__GL_ALLOW_FXAA_USAGE = 0
 # environment
 QT4_IM_MODULE = xim
 # environment
@@ -245,11 +225,11 @@ GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # default
 SUFFIXES := 
 # environment
-SNAP_REEXEC = 
-# environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
 WINDOWPATH = 1
+# environment
+MOZ_CRASHREPORTER_DATA_DIRECTORY = /home/spl211/.mozilla/firefox/Crash Reports
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # environment
@@ -257,11 +237,21 @@ GJS_DEBUG_OUTPUT = stderr
 # default
 .RECIPEPREFIX := 
 # environment
+XRE_PROFILE_PATH = 
+# environment
 LANG = C
 # environment
-VSCODE_PID = 1877
+MOZ_CRASHREPORTER_STRINGS_OVERRIDE = /usr/lib/firefox/browser/crashreporter-override.ini
+# environment
+MOZ_CRASHREPORTER_PING_DIRECTORY = /home/spl211/.mozilla/firefox/Pending Pings
+# environment
+MOZ_CRASHREPORTER_EVENTS_DIRECTORY = /home/spl211/.mozilla/firefox/wtikhl3t.default/crashes/events
+# environment
+VSCODE_PID = 3294
+# environment
+MOZ_APP_SILENT_START = 
 # variable set hash-table stats:
-# Load=125/1024=12%, Rehash=0, Collisions=20/147=14%
+# Load=120/1024=12%, Rehash=0, Collisions=18/142=13%
 
 # Pattern-specific Variable Values
 
@@ -278,9 +268,6 @@ VSCODE_PID = 1877
 # No implicit rules.
 
 # Files
- 
-make: *** No rule to make target 'all'.  Stop.
- 
 
 # Not a target:
 all:
@@ -291,6 +278,9 @@ all:
 
 # Not a target:
 Makefile:
+ 
+make: *** No rule to make target 'all'.  Stop.
+ 
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
@@ -330,6 +320,6 @@ GNUmakefile:
 # strcache performance: lookups = 18 / hit rate = 16%
 # hash-table stats:
 # Load=15/8192=0%, Rehash=0, Collisions=1/18=6%
-# Finished Make data base on Sat Jan  8 16:51:13 2022
+# Finished Make data base on Sat Jan  8 16:58:03 2022
 
  
