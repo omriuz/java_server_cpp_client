@@ -82,6 +82,7 @@ void socketTask::printMessage(std::string answer){
     //TODO: change the delimiter to the correct one 
     std::getline(stream,moreInfo,'^');
     toPrint += sentFor;
+    toPrint += " ";
     toPrint += moreInfo;
     }
 

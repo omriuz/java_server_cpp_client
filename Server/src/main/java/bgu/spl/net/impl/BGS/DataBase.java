@@ -73,10 +73,18 @@ public class DataBase {
         return messagesForUsers.get(users.get(userName));
     }
 
-    public boolean isValid(int connectionId){
+    public boolean isValidId(int connectionId){
         BgsUser user = usersByConnectionId.get(connectionId);
         if(user == null || !user.isLogIn()) return false;
         return true;
+    }
+    public boolean isValidUesers(List<String> usersName){
+        boolean isValid = true;
+        for(String name : usersName){
+            if(isValid && !isRegistered(name))
+                isValid = false;
+        }
+        return isValid;
     }
     public BgsUser getUser(String userName){
         return users.get(userName);

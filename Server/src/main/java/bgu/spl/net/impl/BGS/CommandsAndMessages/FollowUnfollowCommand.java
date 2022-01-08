@@ -21,10 +21,12 @@ public class FollowUnfollowCommand implements Command {
         this.opCode = 4;
         boolean success = false;
         Message backMessage = null;
-        if(followUnfollow & !dataBase.getUser(id).isBlockingMe(dataBase.getUser(userName))) // check if blocked
-            success = dataBase.follow(id, userName);
-        else
-            success = dataBase.unFollow(id, userName);
+        if(dataBase.isRegistered(userName)){
+            if(followUnfollow & !dataBase.getUser(id).isBlockingMe(dataBase.getUser(userName))) // check if blocked
+                success = dataBase.follow(id, userName);
+            else
+                success = dataBase.unFollow(id, userName);
+        }
         if(success)
             backMessage = new AckMessage(opCode);
         else

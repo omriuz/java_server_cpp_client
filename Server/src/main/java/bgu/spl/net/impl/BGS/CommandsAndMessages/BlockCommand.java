@@ -16,7 +16,7 @@ public class BlockCommand implements Command {
     @Override
     public void execute(DataBase dataBase, Connections_Impl connections, int connectionId) {
         this.opCode = 12;
-        boolean valid = dataBase.isValid(connectionId) && dataBase.isRegistered(userName);
+        boolean valid = dataBase.isValidId(connectionId) && dataBase.isRegistered(userName);
         if(!valid)
             connections.send(connectionId,new ErrorMessage(opCode));
         else{

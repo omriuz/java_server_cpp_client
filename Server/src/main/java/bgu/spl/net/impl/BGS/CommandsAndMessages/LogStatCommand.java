@@ -18,7 +18,7 @@ public class LogStatCommand implements Command {
     @Override
     public void execute(DataBase dataBase, Connections_Impl connections, int connectionId) {
         this.opCode = 7;
-        boolean valid = dataBase.isValid(connectionId);
+        boolean valid = dataBase.isValidId(connectionId);
         if(!valid)
             connections.send(connectionId,new ErrorMessage(opCode));
         else
