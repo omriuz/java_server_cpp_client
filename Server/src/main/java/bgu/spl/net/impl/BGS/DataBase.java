@@ -56,7 +56,6 @@ public class DataBase {
         boolean success = false;
         if(askUser != null){
             success = askUser.follow(users.get(userName));
-            users.get(userName).addToFollowers(askUser.getUserName());
         }
         return success;
     }
@@ -66,7 +65,6 @@ public class DataBase {
         boolean success = false;
         if(askUser != null)
             success = askUser.unFollow(users.get(userName));
-            users.get(userName).removeFromFollowers(askUser.getUserName());
         return success;
     }
     public ConcurrentLinkedQueue<NotificationMessage> getmessageQueue(String userName){

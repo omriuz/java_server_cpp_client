@@ -25,7 +25,7 @@ void socketTask::operator()() {
         answer.resize(len-1);
         printMessage(answer);
         if(isAckMessageForLogout(answer)){
-            std::cout << "SocketTask: Exiting...\n" << std::endl;
+            std::cout << "Client exiting..." << std::endl;
             break;
         }
     }
