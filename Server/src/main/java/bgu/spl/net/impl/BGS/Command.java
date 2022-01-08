@@ -1,7 +1,6 @@
-package bgu.spl.net.impl.rci;
+package bgu.spl.net.impl.BGS;
 
-import bgu.spl.net.impl.BGS.Connections_Impl;
-import bgu.spl.net.impl.BGS.DataBase;
+
 
 public interface Command extends Communication {
 

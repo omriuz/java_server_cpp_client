@@ -1,8 +1,6 @@
 package bgu.spl.net.impl.BGS;
 
 import bgu.spl.net.api.Bidi.BidiMessagingProtocol;
-import bgu.spl.net.impl.rci.Command;
-import bgu.spl.net.impl.rci.Communication;
 
 public class RemoteCommandInvocationProtocol implements BidiMessagingProtocol<Communication> {
     private int connectionId;

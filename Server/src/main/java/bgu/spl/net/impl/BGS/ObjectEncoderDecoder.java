@@ -2,9 +2,6 @@ package bgu.spl.net.impl.BGS;
 
 import bgu.spl.net.api.MessageEncoderDecoder;
 import bgu.spl.net.impl.BGS.CommandsAndMessages.*;
-import bgu.spl.net.impl.rci.Command;
-import bgu.spl.net.impl.rci.Communication;
-import bgu.spl.net.impl.rci.Message;
 
 import com.google.gson.Gson;
 
@@ -54,10 +51,8 @@ public class ObjectEncoderDecoder implements MessageEncoderDecoder<Communication
 
     @Override
     public byte[] encode(Communication message) {
-        //TODO: decide between sending a String or sending a json formatted String
         String toReturn = ((Message)message).toString() +"\0";
-        // System.out.println("reached the encoder encode method " + toReturn);
-        return toReturn.getBytes(StandardCharsets.UTF_8);//TODO
+        return toReturn.getBytes(StandardCharsets.UTF_8);
     }
 
     private Command deserializeObject(short opCode) {

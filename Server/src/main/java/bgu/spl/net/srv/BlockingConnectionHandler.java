@@ -1,9 +1,5 @@
 package bgu.spl.net.srv;
-
-import bgu.spl.net.impl.BGS.ObjectEncoderDecoder;
-import bgu.spl.net.impl.BGS.RemoteCommandInvocationProtocol;
-import bgu.spl.net.impl.rci.Command;
-import bgu.spl.net.impl.rci.Message;
+import bgu.spl.net.impl.BGS.*;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

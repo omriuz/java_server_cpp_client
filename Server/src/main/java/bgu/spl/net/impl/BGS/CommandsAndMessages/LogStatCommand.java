@@ -1,10 +1,6 @@
 package bgu.spl.net.impl.BGS.CommandsAndMessages;
 
-import bgu.spl.net.impl.BGS.BgsUser;
-import bgu.spl.net.impl.BGS.Connections_Impl;
-import bgu.spl.net.impl.BGS.DataBase;
-import bgu.spl.net.impl.rci.Command;
-
+import bgu.spl.net.impl.BGS.*;
 import java.util.List;
 
 public class LogStatCommand implements Command {
@@ -24,10 +20,13 @@ public class LogStatCommand implements Command {
         else
         {
             List<BgsUser> loggedInUsers = dataBase.getLoggedInUsers();
+            BgsUser currentUser = dataBase.getUser(connectionId);
             for(BgsUser user :  loggedInUsers){
+                if(!currentUser.isBlockingMe(user)){
                 String optionalInformation = user.getAge() +  " " + user.getNumOfPosts() + " " + user.numOfFollowers() + " "  + user.numOfFollowing();
                 AckMessage toSend = new AckMessage(opCode,optionalInformation);
                 connections.send(connectionId,toSend);
+                }
             }
         }
 

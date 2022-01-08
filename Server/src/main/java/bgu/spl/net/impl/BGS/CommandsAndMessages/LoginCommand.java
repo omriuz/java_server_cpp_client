@@ -1,8 +1,6 @@
 package bgu.spl.net.impl.BGS.CommandsAndMessages;
 
-import bgu.spl.net.impl.BGS.Connections_Impl;
-import bgu.spl.net.impl.BGS.DataBase;
-import bgu.spl.net.impl.rci.Command;
+import bgu.spl.net.impl.BGS.*;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -25,7 +23,7 @@ public class LoginCommand implements Command {
         if(captcha) {
             login = dataBase.logIn(userName, password, id);
             if (login) {
-                connections.send(id, new AckMessage(opCode));//TODO build the AckMessage
+                connections.send(id, new AckMessage(opCode));
                 ConcurrentLinkedQueue<NotificationMessage> messageQueue = dataBase.getmessageQueue(userName);
                 for (NotificationMessage m : messageQueue) {
                     connections.send(id, m);
@@ -33,7 +31,7 @@ public class LoginCommand implements Command {
             }
         }
         if(!captcha | !login)
-            connections.send(id, new ErrorMessage(opCode));//TODO build the Error message
+            connections.send(id, new ErrorMessage(opCode));
     }
 
     public String toString(){

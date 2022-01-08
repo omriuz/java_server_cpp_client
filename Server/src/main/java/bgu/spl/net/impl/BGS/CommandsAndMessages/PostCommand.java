@@ -1,9 +1,6 @@
 package bgu.spl.net.impl.BGS.CommandsAndMessages;
 
-import bgu.spl.net.impl.BGS.BgsUser;
-import bgu.spl.net.impl.BGS.Connections_Impl;
-import bgu.spl.net.impl.BGS.DataBase;
-import bgu.spl.net.impl.rci.Command;
+import bgu.spl.net.impl.BGS.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,13 +24,11 @@ public class PostCommand implements Command {
             BgsUser currentUser = dataBase.getUser(connectionId);
             currentUser.addPost(content);
             sendPost(currentUser.getFollowersNames(),dataBase,currentUser,connections);
-            System.out.println("taged uesers: ");
             sendPost(taggedUsersNames,dataBase,currentUser,connections);
         }
     }
 
     public List<String> getTaggedUsersNames(String content){
-        //TODO: parse the content string to get the tagged users names
         int startIndex = 0;
         int endIndex = 0;
         List<String> tagedNames = new LinkedList<>();
@@ -45,8 +40,6 @@ public class PostCommand implements Command {
             startIndex = content.indexOf("@", endIndex);
         }
 
-        for(String userName : tagedNames)
-            System.out.println(userName);
 
         return tagedNames;
     }

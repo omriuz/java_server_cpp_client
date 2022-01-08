@@ -1,6 +1,6 @@
 package bgu.spl.net.impl.BGS.CommandsAndMessages;
 
-import bgu.spl.net.impl.rci.Message;
+import bgu.spl.net.impl.BGS.*;
 
 public class ErrorMessage implements Message {
     private int opCode;

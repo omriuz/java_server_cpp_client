@@ -18,12 +18,6 @@ public class BgsUser {
     private List<String> postsSent;
     private HashMap<String , List<String>> pmsSent;
 
-    //TODO: check if needed
-//    private Integer connectionID;
-//    private int NumPost;
-//   private boolean loggedin;
-//    private AtomicBoolean loggedin;
-
     public BgsUser(String userName, String password, String birthday) {
         this.userName = userName;
         this.password = password;
@@ -31,26 +25,29 @@ public class BgsUser {
         this.followersNames = new LinkedList<>();
         this.followings = new LinkedList<>();
         this.blocked = new LinkedList<>();
-        this.logIn = false;
-        //TODO: compute the age of the user
-        this.age = 0;
+        int onlyBirthDay = Integer.parseInt(this.birthday.substring(0,2));
+        int birthMonth = Integer.parseInt(this.birthday.substring(3,5));
+        int birthYear= Integer.parseInt(this.birthday.substring(6,10)); 
+        this.age = ((8-onlyBirthDay) + (1-birthMonth)*30 + (2022-birthYear)*365)/365;
         this.numOfPosts = 0;
         this.postsSent = new LinkedList<>();
         this.pmsSent = new HashMap<>();
     }
 
-    public boolean follow(String userName){
+    public boolean follow(BgsUser user){
         boolean success = false;
-        if(!followings.contains(userName)){
-            followings.add(userName);
+        if(!followings.contains(user.getUserName())){
+            followings.add(user.getUserName());
+            user.addToFollowers(getUserName());
             success = true;
         }
         return success;
     }
-    public boolean unFollow(String userName){
+    public boolean unFollow(BgsUser user){
         boolean success = false;
-        if(followings.contains(userName)){
-            followings.remove(userName);
+        if(followings.contains(user.getUserName())){
+            followings.remove(user.getUserName());
+            user.removeFromFollowers(getUserName());
             success = true;
         }
         return success;

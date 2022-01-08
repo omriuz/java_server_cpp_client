@@ -28,7 +28,7 @@ bool ConnectionHandler::connect() {
         std::cerr << "Connection failed (Error: " << e.what() << ')' << std::endl;
         return false;
     }
-    std::cout << "succses" <<endl;
+    std::cout << "connected to the Server" <<endl;
     return true;
 }
  

@@ -55,7 +55,7 @@ public class DataBase {
         BgsUser askUser = usersByConnectionId.get(connectionId);
         boolean success = false;
         if(askUser != null){
-            success = askUser.follow(userName);
+            success = askUser.follow(users.get(userName));
             users.get(userName).addToFollowers(askUser.getUserName());
         }
         return success;
@@ -65,7 +65,7 @@ public class DataBase {
         BgsUser askUser = usersByConnectionId.get(connectionId);
         boolean success = false;
         if(askUser != null)
-            success = askUser.unFollow(userName);
+            success = askUser.unFollow(users.get(userName));
             users.get(userName).removeFromFollowers(askUser.getUserName());
         return success;
     }
@@ -128,8 +128,8 @@ public class DataBase {
             currentUser.block(blockedUserName);
 
         //2: unfollow each other
-        currentUser.unFollow(blockedUserName);
-        users.get(blockedUserName).unFollow(currentUser.getUserName());
+        currentUser.unFollow(users.get(blockedUserName));
+        users.get(blockedUserName).unFollow(currentUser);
     }
 
 

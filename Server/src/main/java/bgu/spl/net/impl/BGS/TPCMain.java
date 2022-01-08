@@ -4,13 +4,11 @@ package bgu.spl.net.impl.BGS;
 import bgu.spl.net.srv.Server;
 
 
-public class BGSServerMain {
+public class TPCMain {
     public static void main(String[] args) {
-        DataBase dataBase = new DataBase(); //one shared object
-
-// you can use any server...
+        DataBase dataBase = new DataBase(); 
         Server.threadPerClient(
-                7777, //port
+                Integer.valueOf(args[0]),
                 () -> new RemoteCommandInvocationProtocol (dataBase), //protocol factory
                 () -> new ObjectEncoderDecoder() //message encoder decoder factory
         ).serve();

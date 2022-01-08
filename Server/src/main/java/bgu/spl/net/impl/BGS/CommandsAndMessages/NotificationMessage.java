@@ -1,6 +1,6 @@
 package bgu.spl.net.impl.BGS.CommandsAndMessages;
 
-import bgu.spl.net.impl.rci.Message;
+import bgu.spl.net.impl.BGS.*;
 
 public class NotificationMessage implements Message {
     private int notificationType;//0 for PM and 1 for Post

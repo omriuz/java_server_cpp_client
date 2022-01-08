@@ -1,9 +1,6 @@
 package bgu.spl.net.impl.BGS.CommandsAndMessages;
 
-import bgu.spl.net.impl.BGS.BgsUser;
-import bgu.spl.net.impl.BGS.Connections_Impl;
-import bgu.spl.net.impl.BGS.DataBase;
-import bgu.spl.net.impl.rci.Command;
+import bgu.spl.net.impl.BGS.*;
 
 import java.util.LinkedList;
 
@@ -26,10 +23,11 @@ public class PMCommand implements Command {
         BgsUser receiveUser = dataBase.getUser(receiveUserName);
         filterMessage(dataBase);
         if (sendingUser.isLogIn()) {
-            if (sendingUser.isFollow(receiveUserName)) { //TODO what happened if blocked?
-                connections.send(id, new AckMessage(opCode));//TODO Ack message
-                if (receiveUser.isLogIn())
+            if (sendingUser.isFollow(receiveUserName)) {
+                if (receiveUser.isLogIn()){
                     connections.send(receiveUser.getCurrentConnectionsId(), new NotificationMessage(0, sendingUser.getUserName(), content));
+                    connections.send(id, new AckMessage(opCode));
+                }
                 else
                     dataBase.savePost(content, sendingUser.getUserName(), receiveUserName);
                 sendingUser.addPM(receiveUserName,content);
@@ -37,7 +35,7 @@ public class PMCommand implements Command {
             }
         }
         if(!send)
-            connections.send(id, new ErrorMessage(opCode));//TODO ERROR message
+            connections.send(id, new ErrorMessage(opCode));
     }
 
     private void filterMessage(DataBase dataBase){

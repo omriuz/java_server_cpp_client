@@ -4,7 +4,7 @@
 using namespace std;
 using boost::property_tree::ptree;
 
-keyBoardTask::keyBoardTask(ConnectionHandler & connectionHandler) : handler(connectionHandler), shouldTerminate(false){};
+keyBoardTask::keyBoardTask(ConnectionHandler & connectionHandler) : handler(connectionHandler), shouldTerminate(false),opCode(0){};
 
 
 void keyBoardTask::operator()() {
@@ -82,8 +82,6 @@ std::string keyBoardTask::toJsonRegister(std::string rawMessage){
 
     boost::property_tree::write_json(json, root);
     return json.str();
-    
-    //TODO check how write_json works.
 
 }
 std::string keyBoardTask::toJsonLogin(std::string rawMessage){
@@ -166,8 +164,6 @@ std::string keyBoardTask::toJsonPM(std::string rawMessage){
     std::string userName = editMessage.substr(0,index);
     std::string content = editMessage.substr(index+1);
     std::stringstream json;
-
-    //TODO: make sure that we dont need to send the sending time
     root.put("receiveUserName",userName);
     root.put("content",content);
 
