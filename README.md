@@ -1,4 +1,5 @@
 command line to activate each Server:
+
 Ractor : mvn exec:java =Dexec.mainClass="bgu.spl.net.impl.BGS.ReactorMain" -Dexec.args="<port> <Num of threads>"
   
 Thread Per Client :  mvn exec:java =Dexec.mainClass="bgu.spl.net.impl.BGS.TPCMain" -Dexec.args="<port>"
