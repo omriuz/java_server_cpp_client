@@ -5,8 +5,10 @@ import bgu.spl.net.impl.BGS.CommandsAndMessages.RegisterCommand;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
 
 public class DataBase {
 
@@ -20,9 +22,9 @@ public class DataBase {
         this.usersByConnectionId = new ConcurrentHashMap<>();
         this.messagesForUsers = new ConcurrentHashMap<>();
         this.wordToFilter = new LinkedList<>();
-        wordToFilter.add("CNF");
-        wordToFilter.add("Btree");
-        wordToFilter.add("skip list");
+        for(String word : addWordToFilter()){
+            wordToFilter.add(word);
+        }
     }
     public boolean register(RegisterCommand registerCommand,int connectionId){
         if(users.containsKey(registerCommand.getUserName()))
@@ -131,6 +133,13 @@ public class DataBase {
         //2: unfollow each other
         currentUser.unFollow(users.get(blockedUserName));
         users.get(blockedUserName).unFollow(currentUser);
+    }
+
+    private HashSet<String> addWordToFilter(){
+        HashSet<String> wordToFilter = new HashSet<>();
+        wordToFilter.add("CNF");
+        // add more words
+        return wordToFilter;
     }
 
 

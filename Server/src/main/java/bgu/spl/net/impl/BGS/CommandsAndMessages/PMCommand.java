@@ -42,7 +42,6 @@ public class PMCommand implements Command {
         LinkedList<String> wordToFilter = (LinkedList)dataBase.getWordToFilter();
         for(String word : wordToFilter){
             content = content.replaceAll(word,"filtered");
-            System.out.println(content);
         }
     }
 
