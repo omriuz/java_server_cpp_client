@@ -38,7 +38,7 @@ public class DataBase {
     public boolean logIn(String userName, String pasword, int connectionId){
         boolean logIn = false;
         BgsUser user = users.get(userName);
-        if(user != null){
+        if(user != null & !usersByConnectionId.containsKey(connectionId)){
             usersByConnectionId.put(connectionId,user);
             if(user.getPassword().equals(pasword) & !user.isLogIn()){
                 logIn = true;
