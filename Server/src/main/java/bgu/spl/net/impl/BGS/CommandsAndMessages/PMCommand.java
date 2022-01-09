@@ -26,12 +26,12 @@ public class PMCommand implements Command {
             if (sendingUser.isFollow(receiveUserName)) {
                 if (receiveUser.isLogIn()){
                     connections.send(receiveUser.getCurrentConnectionsId(), new NotificationMessage(0, sendingUser.getUserName(), content));
-                    connections.send(id, new AckMessage(opCode));
                 }
                 else
                     dataBase.savePost(content, sendingUser.getUserName(), receiveUserName);
                 sendingUser.addPM(receiveUserName,content);
-                send = true;
+                connections.send(id, new AckMessage(opCode));
+                send = true;   
             }
         }
         if(!send)
@@ -39,9 +39,10 @@ public class PMCommand implements Command {
     }
 
     private void filterMessage(DataBase dataBase){
-        LinkedList<String> worldToFilter = (LinkedList)dataBase.getWorldToFilter();
-        for(String world : worldToFilter){
-            content.replaceAll(world,"filtered");
+        LinkedList<String> wordToFilter = (LinkedList)dataBase.getWordToFilter();
+        for(String word : wordToFilter){
+            content = content.replaceAll(word,"filtered");
+            System.out.println(content);
         }
     }
 

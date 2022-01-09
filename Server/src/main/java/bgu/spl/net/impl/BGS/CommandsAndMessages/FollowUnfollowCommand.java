@@ -19,7 +19,7 @@ public class FollowUnfollowCommand implements Command {
         boolean success = false;
         Message backMessage = null;
         if(dataBase.isRegistered(userName) & dataBase.isLogin(dataBase.getUser(id).getUserName())){
-            if(followUnfollow & !dataBase.getUser(id).isBlockingMe(dataBase.getUser(userName))) // check if blocked
+            if(followUnfollow & !dataBase.getUser(id).isBlockingMe(dataBase.getUser(userName)) & !dataBase.getUser(id).isBlocked(dataBase.getUser(userName).getUserName())) // check if blocked
                 success = dataBase.follow(id, userName);
             else
                 success = dataBase.unFollow(id, userName);

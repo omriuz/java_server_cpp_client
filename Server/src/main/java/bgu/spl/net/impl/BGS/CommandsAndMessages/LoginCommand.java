@@ -25,9 +25,10 @@ public class LoginCommand implements Command {
             if (login) {
                 connections.send(id, new AckMessage(opCode));
                 ConcurrentLinkedQueue<NotificationMessage> messageQueue = dataBase.getmessageQueue(userName);
-                for (NotificationMessage m : messageQueue) {
-                    connections.send(id, m);
+                while(!messageQueue.isEmpty()){
+                    connections.send(id,messageQueue.poll());
                 }
+
             }
         }
         if(!captcha | !login)

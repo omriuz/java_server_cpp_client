@@ -13,13 +13,16 @@ public class DataBase {
     private ConcurrentHashMap<String, BgsUser> users;
     private ConcurrentHashMap<Integer, BgsUser> usersByConnectionId;
     private ConcurrentHashMap<BgsUser, ConcurrentLinkedQueue<NotificationMessage>> messagesForUsers;
-    private List<String> worldToFilter;
+    private List<String> wordToFilter;
 
     public DataBase() {
         this.users = new ConcurrentHashMap<>();
         this.usersByConnectionId = new ConcurrentHashMap<>();
         this.messagesForUsers = new ConcurrentHashMap<>();
-        this.worldToFilter = new LinkedList<>();
+        this.wordToFilter = new LinkedList<>();
+        wordToFilter.add("CNF");
+        wordToFilter.add("Btree");
+        wordToFilter.add("skip list");
     }
     public boolean register(RegisterCommand registerCommand,int connectionId){
         if(users.containsKey(registerCommand.getUserName()))
@@ -115,8 +118,8 @@ public class DataBase {
         return loggedInUsers;
     }
 
-    public List<String> getWorldToFilter(){
-        return worldToFilter;
+    public List<String> getWordToFilter(){
+        return wordToFilter;
     }
 
     public void block(int blockingUserId, String blockedUserName){
