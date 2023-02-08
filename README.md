@@ -1,3 +1,7 @@
+A server-client implementation.
+The server was implemented in java and the client was implemented in cpp.
+The information is passed between them as JSON strings.
+
 command line to activate each Server:
 
 Ractor : mvn exec:java =Dexec.mainClass="bgu.spl.net.impl.BGS.ReactorMain" -Dexec.args="<port> <Num of threads>"
